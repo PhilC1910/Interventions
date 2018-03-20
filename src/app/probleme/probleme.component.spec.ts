@@ -52,4 +52,8 @@ describe('ProblemeComponent', () => {
   it('champs prénom du probleme est valide avec 50 espaces',() => {
     expect(true).toBeTruthy();
   });
+
+  it('champs prénom du probleme est valide avec 2 espaces et 1 caractère',() => {
+    expect(true).toBeTruthy();
+  });
 });
