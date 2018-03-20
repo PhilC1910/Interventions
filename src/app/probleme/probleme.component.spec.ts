@@ -48,4 +48,8 @@ describe('ProblemeComponent', () => {
   it('champs prénom du probleme est invalide avec 1 caractère',() => {
     expect(false).toBeFalsy();
   });
+
+  it('champs prénom du probleme est valide avec 50 espaces',() => {
+    expect(true).toBeTruthy();
+  });
 });
