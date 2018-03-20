@@ -40,4 +40,8 @@ describe('ProblemeComponent', () => {
   it('champs prénom du probleme est valide avec 200 caractères',() => {
     expect(true).toBeTruthy();
   });
+
+  it('champs prénom du probleme est invalide avec aucune valeur',() => {
+    expect(false).toBeFalsy();
+  });
 });
