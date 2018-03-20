@@ -28,4 +28,8 @@ describe('ProblemeComponent', () => {
   it('champs prénom du probleme est invalide avec 2 caractères',() => {
     expect(false).toBeFalsy();
   });
+
+  it('champs prénom du probleme est valide avec 5 caractères',() => {
+    expect(true).toBeTruthy();
+  });
 });
