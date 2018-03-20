@@ -32,7 +32,12 @@ describe('ProblemeComponent', () => {
   it('champs prénom du probleme est valide avec 5 caractères',() => {
     expect(true).toBeTruthy();
   });
+
   it('champs prénom du probleme est valide avec 3 caractères',() => {
+    expect(true).toBeTruthy();
+  });
+
+  it('champs prénom du probleme est valide avec 200 caractères',() => {
     expect(true).toBeTruthy();
   });
 });
