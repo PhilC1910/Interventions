@@ -44,4 +44,8 @@ describe('ProblemeComponent', () => {
   it('champs prénom du probleme est invalide avec aucune valeur',() => {
     expect(false).toBeFalsy();
   });
+
+  it('champs prénom du probleme est invalide avec 1 caractère',() => {
+    expect(false).toBeFalsy();
+  });
 });
