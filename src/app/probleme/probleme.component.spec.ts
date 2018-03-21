@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProblemeComponent } from './probleme.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -9,7 +10,8 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [AngularFontAwesomeModule],
+     
+      imports: [AngularFontAwesomeModule,  ReactiveFormsModule],
       declarations: [ ProblemeComponent ]
     })
     .compileComponents();
@@ -26,34 +28,44 @@ describe('ProblemeComponent', () => {
   // });
 
   it('champs prénom du probleme est invalide avec 2 caractères',() => {
-    expect(false).toBeFalsy();
-  });
-
-  it('champs prénom du probleme est valide avec 5 caractères',() => {
-    expect(true).toBeTruthy();
+    let zone =component.problemeForm.controls['prenomProbleme'];
+    zone.setValue('a'.repeat(2));
+    expect(zone.valid).toBeFalsy();
   });
 
   it('champs prénom du probleme est valide avec 3 caractères',() => {
-    expect(true).toBeTruthy();
+    let zone =component.problemeForm.controls['prenomProbleme'];
+    zone.setValue('a'.repeat(3));
+    expect(zone.valid).toBeTruthy();
   });
 
   it('champs prénom du probleme est valide avec 200 caractères',() => {
-    expect(true).toBeTruthy();
+    let zone =component.problemeForm.controls['prenomProbleme'];
+    zone.setValue('a'.repeat(200));
+    expect(zone.valid).toBeTruthy();
   });
 
   it('champs prénom du probleme est invalide avec aucune valeur',() => {
-    expect(false).toBeFalsy();
+    let zone =component.problemeForm.controls['prenomProbleme'];
+    zone.setValue(' ');
+    expect(zone.valid).toBeFalsy();
   });
 
   it('champs prénom du probleme est invalide avec 1 caractère',() => {
-    expect(false).toBeFalsy();
+    let zone =component.problemeForm.controls['prenomProbleme'];
+    zone.setValue('a'.repeat(1));
+    expect(zone.valid).toBeFalsy();
   });
 
   it('champs prénom du probleme est valide avec 50 espaces',() => {
-    expect(true).toBeTruthy();
+    let zone =component.problemeForm.controls['prenomProbleme'];
+    zone.setValue('a'.repeat(50));
+    expect(zone.valid).toBeTruthy();
   });
 
   it('champs prénom du probleme est valide avec 2 espaces et 1 caractère',() => {
+    let zone =component.problemeForm.controls['prenomProbleme'];
+    zone.setValue('a'.repeat(1), ' '.repeat(2) );
     expect(true).toBeTruthy();
   });
 });
