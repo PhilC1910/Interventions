@@ -14,15 +14,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     AccueilComponent,
-    ProblemeComponent,
-    ReactiveFormsModule
+    ProblemeComponent
+ 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
-    AppRoutingModule
-
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
