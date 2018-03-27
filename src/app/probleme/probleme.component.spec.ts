@@ -28,44 +28,58 @@ describe('ProblemeComponent', () => {
   // });
 
   it('champs prénom du probleme est invalide avec 2 caractères',() => {
+    let errors = { };
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue('a'.repeat(2));
-    expect(zone.valid).toBeFalsy();
+    errors = zone.errors || { };
+    expect(errors['minlength']).toBeTruthy();
   });
 
   it('champs prénom du probleme est valide avec 3 caractères',() => {
+    let errors = { };
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue('a'.repeat(3));
-    expect(zone.valid).toBeTruthy();
+    errors = zone.errors || { };
+    expect(errors['minlength']).toBeFalsy();
   });
 
   it('champs prénom du probleme est valide avec 200 caractères',() => {
+    let errors = { };
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue('a'.repeat(200));
-    expect(zone.valid).toBeTruthy();
+    errors = zone.errors || { };
+    expect(errors['minlength']).toBeFalsy();
   });
 
   it('champs prénom du probleme est invalide avec aucune valeur',() => {
+    let errors = { };
     let zone =component.problemeForm.controls['prenomProbleme'];
-    zone.setValue(' ');
-    expect(zone.valid).toBeFalsy();
+    zone.setValue('');
+    errors = zone.errors || { };
+    expect(errors['required']).toBeTruthy();
   });
 
   it('champs prénom du probleme est invalide avec 1 caractère',() => {
+    let errors = { };
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue('a'.repeat(1));
-    expect(zone.valid).toBeFalsy();
+    errors = zone.errors || { };
+    expect(errors['minlength']).toBeTruthy();
   });
 
   it('champs prénom du probleme est valide avec 50 espaces',() => {
+    let errors = { };
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue('a'.repeat(50));
-    expect(zone.valid).toBeTruthy();
+    errors = zone.errors || { };
+    expect(errors['minlength']).toBeFalsy(); 
   });
 
   it('champs prénom du probleme est valide avec 2 espaces et 1 caractère',() => {
+    let errors = { };
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue('a'.repeat(1), ' '.repeat(2) );
-    expect(true).toBeTruthy();
+    errors = zone.errors || { };
+    expect(errors['minlength']).toBeTruthy();
   });
 });

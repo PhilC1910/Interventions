@@ -1,0 +1,1 @@
+[0327/145518.374:ERROR:file_io_win.cc(179)] CreateFile C:\Users\Philippe\AppData\Local\Temp\karma-93888190\Crashpad\settings.dat: Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus. (0x20)
