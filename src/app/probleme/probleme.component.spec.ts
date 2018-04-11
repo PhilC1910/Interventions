@@ -72,7 +72,7 @@ describe('ProblemeComponent', () => {
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue(' '.repeat(50));
     errors = zone.errors || { };
-    expect(errors['minlength']).toBeTruthy(); 
+    expect(errors['longueurMinimum']).toBeFalsy(); 
   });
 
   it('champs prénom du probleme est invalide avec 2 espaces et 1 caractère',() => {
@@ -80,6 +80,6 @@ describe('ProblemeComponent', () => {
     let zone =component.problemeForm.controls['prenomProbleme'];
     zone.setValue('a'.repeat(1), ' '.repeat(2) );
     errors = zone.errors || { };
-    expect(errors['minlength']).toBeTruthy();
+    expect(errors['longueurMinimum']).toBeFalsy();
   });
 });

@@ -18,16 +18,57 @@
       problemeForm.get('caractere').dirty) && !problemeForm.get('caractere').errors.longueurMinimum,
       'is-valid':(problemeForm.get('caractere').touched||problemeForm.get('caractere').dirty)
        && problemeForm.get('caractere').errors.longueurMinimum}"/>
-      <span class="form-text" *ngIf="problemeForm.get('caractere').touched||problemeForm.get('caractere').dirty && problemeForm.get('prenomProbleme').errors ">
+      <span class="form-text" *ngIf="problemeForm.get('caractere').touched||problemeForm.get('caractere').dirty && problemeForm.get('caractere').errors ">
           <span *ngIf="!problemeForm.get('caractere').errors.longueurMinimum">
               <small class="text-muted">
-                 Veuillez entrer plus de 2  caractères.
+                 Veuillez entrer plus  de  caractères.
+            </small>
+          </span>
+       </span> 
+    </div>
+    <label for="nomProblemeId" class="col-md-2 col-form-label text-right">nom :</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="nomProblemeId" type="text" placeholder="nom" formControlName="nomProbleme" 
+      [ngClass]="{'is-invalid':(problemeForm.get('nomProbleme').touched||
+      problemeForm.get('nomProbleme').dirty) && !problemeForm.get('nomProbleme').valid,
+      'is-valid':(problemeForm.get('nomProbleme').touched||problemeForm.get('nomProbleme').dirty)
+       && problemeForm.get('nomProbleme').valid}"/>
+      <span class="form-text" *ngIf="problemeForm.get('nomProbleme').touched||
+      problemeForm.get('nomProbleme').dirty && problemeForm.get('nomProbleme').errors ">
+          <span *ngIf="!problemeForm.get('nomProbleme').valid">
+              <small class="text-muted">
+                 Veuillez entrer moins de caractères.
             </small>
           </span>
        </span> 
     </div>
   </div> 
-
+        <!-- Zone de liste déroulante TYPE DE PROBLÈME -->        
+        <div class="form-group row">          
+          <label for="noTypeProblemeId" class="col-md-2 col-form-label text-right">Type de problème :</label>
+          <div class="col-md-10">
+            <select class="form-control"
+            id="noTypeProblemeId"
+            formControlName="noTypeProbleme"
+            [ngClass]="{'is-valid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) &&
+                  problemeForm.get('noTypeProbleme').valid, 
+                  'is-invalid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) &&
+                  !problemeForm.get('noTypeProbleme').valid }"            
+            >
+                <option value="">Sélectionner un type de problème (obligatoire) ...</option>                        
+                <option *ngFor="let typ of typesProblemes" [value]="typ.id">{{typ.descriptionTypeProbleme}}</option>                        
+            </select>
+            <span class="form-text" *ngIf="(problemeForm.get('noTypeProbleme').touched || 
+                  problemeForm.get('noTypeProbleme').dirty) && 
+                  problemeForm.get('noTypeProbleme').errors">
+                  <span *ngIf="problemeForm.get('noTypeProbleme').errors.required">
+                    <small  class="text-muted">
+                      Merci de sélectionner un type de problème.
+                    </small> 
+                  </span>       
+            </span>
+          </div>
+        </div> 
 </form>
      </div>
     </div>
