@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProblemeComponent } from './probleme.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TypeProduitService } from './type-probleme.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -11,8 +13,9 @@ describe('ProblemeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
      
-      imports: [AngularFontAwesomeModule,  ReactiveFormsModule],
-      declarations: [ ProblemeComponent ]
+      imports: [AngularFontAwesomeModule,  ReactiveFormsModule, HttpClientModule],
+      declarations: [ ProblemeComponent ],
+      providers:[TypeProduitService]
     })
     .compileComponents();
   }));
@@ -82,4 +85,40 @@ describe('ProblemeComponent', () => {
     errors = zone.errors || { };
     expect(errors['longueurMinimum']).toBeFalsy();
   });
+
+  it('Zone Addresse Courriel  commande est désactivée quand ne pas me notifier', () => {
+      component.gestionNotifications('pasNotification');
+      let zone = component.problemeForm.get('addresseCourrielGroup.courriel');
+      expect(zone.status).toEqual('DISABLED'); 
+  });
+
+  it('Zone Confirmer  Courriel   commande est désactivée quand ne pas me notifier', () => {
+    component.gestionNotifications('pasNotification');
+    let zone = component.problemeForm.get('addresseCourrielGroup.courrielConfirmation');
+    expect(zone.status).toEqual('DISABLED'); 
+});
+
+it('Zone Confirmer  Courriel   commande est activée si parCourriel', () => {
+  component.gestionNotifications('parCourriel');
+
+  let zone = component.problemeForm.get('addresseCourrielGroup.courrielConfirmation');
+  expect(zone.status).not.toEqual('DISABLED'); 
+});
+it('Zone Confirmer  Courriel   commande est activée si parCourriel', () => {
+  component.gestionNotifications('parCourriel');
+  
+  let zone = component.problemeForm.get('addresseCourrielGroup.courrielConfirmation');
+  expect(zone.status).not.toEqual('DISABLED'); 
+});
+it('Zone Télephone commande est désactivé quand ne pas me notifier', () => {
+  component.gestionNotifications('pasNotification');
+  let zone = component.problemeForm.get('telephone');
+  expect(zone.status).toEqual('DISABLED'); 
+});
+
+it('Zone Confirmer  Télephone commande est vide quand ne pas me notifier', () => {
+  component.gestionNotifications('pasNotification');
+  let zone = component.problemeForm.get('telephone');
+  expect(zone.value).toBeNull(); 
+});
 });
