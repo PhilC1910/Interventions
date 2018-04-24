@@ -50,9 +50,11 @@
             <select class="form-control"
             id="noTypeProblemeId"
             formControlName="noTypeProbleme"
-            [ngClass]="{'is-valid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) &&
+            [ngClass]="{'is-valid': (problemeForm.get('noTypeProbleme').touched ||
+             problemeForm.get('noTypeProbleme').dirty) &&
                   problemeForm.get('noTypeProbleme').valid, 
-                  'is-invalid': (problemeForm.get('noTypeProbleme').touched || problemeForm.get('noTypeProbleme').dirty) &&
+                  'is-invalid': (problemeForm.get('noTypeProbleme').touched || 
+                  problemeForm.get('noTypeProbleme').dirty) &&
                   !problemeForm.get('noTypeProbleme').valid }"            
             >
                 <option value="">Sélectionner un type de problème (obligatoire) ...</option>                        

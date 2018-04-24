@@ -4,6 +4,7 @@ import { nombreCaractereValidator } from '../shared/caracteres-validator';
 import { TypeProduitService } from './type-probleme.service';
 import { ITypeProbleme } from './typeProbleme';
 import { validateConfig } from '@angular/router/src/config';
+import { emailMatcherValidator } from '../shared/emailMatcher-validator';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class ProblemeComponent implements OnInit {
           courriel:[{value:''}],
           courrielConfirmation:[{value:''}]
         }),
-        telephone:[{value: '', disabled: true}],
+        telephone:[{value: ''}],
      });  
      
      this.typeProbleme.obtenirTypeProbleme()
@@ -37,13 +38,13 @@ export class ProblemeComponent implements OnInit {
                 error => this.errorMessage = <any>error);
       
   }
+  
 gestionNotifications(typeProbleme : string): void {
+  const addresseCourrielGroupControl = this.problemeForm.get('addresseCourrielGroup');
  const addresseCourrielControl = this.problemeForm.get('addresseCourrielGroup.courriel');
- addresseCourrielControl.disable();
  const courrielConfirmationControl = this.problemeForm.get('addresseCourrielGroup.courrielConfirmation');
- courrielConfirmationControl.disable(); 
  const telephoneControl = this.problemeForm.get('telephone');
- telephoneControl.disable();
+
   // tous remettre a zéro
   addresseCourrielControl.clearValidators();
   addresseCourrielControl.reset();
@@ -51,16 +52,17 @@ gestionNotifications(typeProbleme : string): void {
 
   courrielConfirmationControl.clearValidators();
   courrielConfirmationControl.reset();
-  courrielConfirmationControl.reset();
+  courrielConfirmationControl.disable();
 
   telephoneControl.clearValidators();
   telephoneControl.reset();
   telephoneControl.disable();
 
  if(typeProbleme === 'parCourriel'){
-  addresseCourrielControl.setValidators(Validators.required);
+  addresseCourrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])]);
+  addresseCourrielControl.setValidators([Validators.required,  Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
   addresseCourrielControl.enable();
-  courrielConfirmationControl.setValidators(Validators.required)
+  courrielConfirmationControl.setValidators([Validators.required,  Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')])
   courrielConfirmationControl.enable();
  }else{
   if(typeProbleme === 'parMessageTexte'){
@@ -68,9 +70,11 @@ gestionNotifications(typeProbleme : string): void {
     telephoneControl.enable();
    }
 } 
+addresseCourrielGroupControl.updateValueAndValidity();
  addresseCourrielControl.updateValueAndValidity();
  courrielConfirmationControl.updateValueAndValidity();
 telephoneControl.updateValueAndValidity();
+
 
   } 
 }
