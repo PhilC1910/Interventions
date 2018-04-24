@@ -242,7 +242,7 @@ it('Zone  confirmer Courriel est désactivée quand notifier par messagerie text
 
 });
 
-it('Zone  Téléphone est désactivée quand notifier par messagerie texte  ', () => {
+it('Zone  Téléphone est désactivée  sans valeur quand notifier par messagerie texte  ', () => {
   component.gestionNotifications('parMessageTexte');
 
   let zone = component.problemeForm.get('telephone');
