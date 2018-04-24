@@ -62,11 +62,11 @@ gestionNotifications(typeProbleme : string): void {
   addresseCourrielGroupControl.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])]);
   addresseCourrielControl.setValidators([Validators.required,  Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
   addresseCourrielControl.enable();
-  courrielConfirmationControl.setValidators([Validators.required,  Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')])
+  courrielConfirmationControl.setValidators([Validators.required,  Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
   courrielConfirmationControl.enable();
  }else{
   if(typeProbleme === 'parMessageTexte'){
-    telephoneControl.setValidators(Validators.required);
+    telephoneControl.setValidators([Validators.required,  Validators.pattern('[0-9]+'), Validators.minLength(10),  Validators.maxLength(10)])
     telephoneControl.enable();
    }
 } 
