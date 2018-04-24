@@ -36,8 +36,15 @@ export class ProblemeComponent implements OnInit {
      this.typeProbleme.obtenirTypeProbleme()
      .subscribe(typ => this.typesProblemes = typ,
                 error => this.errorMessage = <any>error);
+
+   this.problemeForm.get('appliquerNotifications').valueChanges
+  .subscribe(value => this.gestionNotifications(value));        
       
   }
+
+ 
+   
+
   
 gestionNotifications(typeProbleme : string): void {
   const addresseCourrielGroupControl = this.problemeForm.get('addresseCourrielGroup');
