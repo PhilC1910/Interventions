@@ -14,12 +14,14 @@
   <div class="form-group row">
     <label for="prenomProblemeId" class="col-md-2 col-form-label text-right">Prénom :</label>
     <div class="col-sm-10">
-      <input class="form-control" id="prenomProblemeId" type="text" placeholder="prenom" formControlName="caractere" [ngClass]="{'is-invalid':(problemeForm.get('caractere').touched||
-      problemeForm.get('caractere').dirty) && !problemeForm.get('caractere').errors.longueurMinimum,
-      'is-valid':(problemeForm.get('caractere').touched||problemeForm.get('caractere').dirty)
-       && problemeForm.get('caractere').errors.longueurMinimum}"/>
-      <span class="form-text" *ngIf="problemeForm.get('caractere').touched||problemeForm.get('caractere').dirty && problemeForm.get('caractere').errors ">
-          <span *ngIf="!problemeForm.get('caractere').errors.longueurMinimum">
+      <input class="form-control" id="prenomProblemeId" type="text" placeholder="prenom" formControlName="prenomProbleme" 
+      [ngClass]="{'is-invalid':(problemeForm.get('prenomProbleme').touched||
+      problemeForm.get('prenomProbleme').dirty) && !problemeForm.get('prenomProbleme').valid,
+      'is-valid':(problemeForm.get('prenomProbleme').touched||problemeForm.get('prenomProbleme').dirty)
+       && problemeForm.get('prenomProbleme').valid}"/>
+      <span class="form-text" *ngIf="problemeForm.get('prenomProbleme').touched||problemeForm.get('prenomProbleme')
+      .dirty && problemeForm.get('prenomProbleme').errors ">
+          <span *ngIf="!problemeForm.get('prenomProbleme').valid">
               <small class="text-muted">
                  Veuillez entrer plus  de  caractères.
             </small>
@@ -86,7 +88,7 @@
                
 <input type="radio" 
                       
-value="pasnotification" 
+value="pasNotification" 
                       
 id="NotifiezMoiId"
                        
@@ -125,57 +127,72 @@ formControlName = "appliquerNotifications">&nbsp;Par message texte
       
  <div class="form-group row">          
           
-    <label for="telephoneId" class="col-
-  md-2 col-form-label text-right">Téléphone (SMS) :</label>
+    <label for="telephoneId" class="col-md-2 col-form-label text-right">Téléphone (SMS) :</label>
             
     <div class="col-md-10">
-                <input class="form-control" 
-                id="telephoneId" 
-           
-       
+                
+  <input class="form-control" 
+              
+    id="telephoneId" 
+                
   type="text" 
-   placeholder="Entrez 10 chiffres seulement.  Par exemple 5141118888" 
+             
+     placeholder="Entrez 10 chiffres seulement.  Par exemple 5141118888" 
                
    formControlName="telephone" 
-                [ngClass]="{'is-valid': (problemeForm.get('telephone').touched || 
+                
+  [ngClass]="{'is-valid': (problemeForm.get('telephone').touched || 
               
     problemeForm.get('telephone').dirty) &&
-                problemeForm.get('telephone').valid , 'is-invalid': (problemeForm.get('telephone').touched || 
+                problemeForm.get('telephone').valid , 
+  'is-invalid': (problemeForm.get('telephone').touched || 
   
                 problemeForm.get('telephone').dirty) &&
-                !problemeForm.get('telephone').valid }" />
+               
+   !problemeForm.get('telephone').valid }" />
   
                
    <span class="form-text" *ngIf="(problemeForm.get('telephone').touched || 
-                problemeForm.get('telephone').dirty) && 
+    
+              problemeForm.get('telephone').dirty) && 
               
     (problemeForm.get('telephone').errors ||
-                problemeForm.get('telephone').errors)">
-                  <span *ngIf="problemeForm.get('telephone').errors?.required">
-                      <small  class="text-muted">
+               
+   problemeForm.get('telephone').errors)">
+               
+     <span *ngIf="problemeForm.get('telephone').errors?.required">
+                
+        <small  class="text-muted">
                          Merci de saisir votre numéro de téléphone.
                       </small>
-                  </span>                         
-                  <span *ngIf="problemeForm.get('telephone').errors?.minlength">
+       
+             </span>                         
+                
+    <span *ngIf="problemeForm.get('telephone').errors?.minlength">
                     <small  class="text-muted">                  
-                        Veuillez entrer plus de caractères.
+                        Veuillez entrer plus de caract�res.
                     </small>
                   </span>
                   <span *ngIf="problemeForm.get('telephone').errors?.maxlength">
                     <small  class="text-muted">                  
-                        Veuillez entrer moins de caractères.
+                        Veuillez entrer moins de caract�res.
                     </small>
                   </span>                
                   <span *ngIf="problemeForm.get('telephone').errors?.pattern">
                       <small  class="text-muted">             
-                                 
-                          Merci d'entrer seulement des chiffres.
+                Merci d'entrer seulement des chiffres.
                      
    </small>
-                  </span> 
-                </span>
-              </div>
-            </div>
+                
+    </span> 
+               
+   </span>
+          
+      </div>
+           
+   </div>
+  
+    
   
            
    <!-- Zone de texte COURRIEL -->          
@@ -192,10 +209,11 @@ formControlName = "appliquerNotifications">&nbsp;Par message texte
      type="email" 
                   placeholder="Courriel (obligatoire si notification par courriel)" 
                   formControlName = "courriel"
-                  [ngClass]="{'is-valid': (problemeForm.get('addresseCourrielGroup.courriel').touched || 
+                  [ngClass]="{'is-valid': (problemeForm.get('addresseCourrielGroup.courriel').touched ||
                               problemeForm.get('addresseCourrielGroup.courriel').dirty) &&
                               problemeForm.get('addresseCourrielGroup.courriel').valid, 
-                              'is-invalid': (problemeForm.get('addresseCourrielGroup.courriel').touched || problemeForm.get('addresseCourrielGroup.courriel').dirty) &&
+                              'is-invalid': (problemeForm.get('addresseCourrielGroup.courriel').touched || 
+                              problemeForm.get('addresseCourrielGroup.courriel').dirty) &&
                               !problemeForm.get('addresseCourrielGroup.courriel').valid }" />
   
                   <span class="form-text" *ngIf="(problemeForm.get('addresseCourrielGroup.courriel').touched || 
@@ -244,7 +262,7 @@ formControlName = "appliquerNotifications">&nbsp;Par message texte
                             problemeForm.get('addresseCourrielGroup').errors)">                                
                            <span *ngIf="problemeForm.get('addresseCourrielGroup.courrielConfirmation').errors?.required">
                                 <small  class="text-muted">                            
-                                    Confirmez votre adresse courriel (la r��crire)
+                                    Confirmez votre adresse courriel (la réécrire)
                                 </small>
                           </span>
                           <span *ngIf="problemeForm.get('addresseCourrielGroup').errors?.match">
@@ -258,7 +276,7 @@ formControlName = "appliquerNotifications">&nbsp;Par message texte
         
   <!-- Zone de texte # Unit�  -->        
   <div class="form-group row">          
-    <label for="noUniteId" class="col-md-2 col-form-label text-right"># Unit� :</label>
+    <label for="noUniteId" class="col-md-2 col-form-label text-right"># Unité:</label>
     <div class="col-md-10">
       <input class="form-control" 
       id="noUniteId" 
@@ -280,7 +298,7 @@ formControlName = "appliquerNotifications">&nbsp;Par message texte
       id="descriptionProblemeId" 
       type="text" 
     
-    placeholder="D�crire le propbl�me ici (obligatoire)" 
+    placeholder="Décrire le propblème ici (obligatoire)" 
       formControlName="descriptionProbleme"            
       [ngClass]="{'is-valid': (problemeForm.get('descriptionProbleme').touched || problemeForm.get('descriptionProbleme').dirty) &&
         problemeForm.get('descriptionProbleme').valid, 
@@ -299,7 +317,7 @@ formControlName = "appliquerNotifications">&nbsp;Par message texte
   
         <span *ngIf="problemeForm.get('descriptionProbleme').errors.minlength">
           <small  class="text-muted">
-          La description du probl�me doit comporter plus de 5 caractères.
+          La description du problème doit comporter plus de 5 caractères.
           </small> 
         </span>       
       </span>
@@ -323,23 +341,21 @@ formControlName = "appliquerNotifications">&nbsp;Par message texte
     </div> 
   
          
-     <div class="form-group row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <span> 
-                                        
-                        <button class="btn btn-primary"
-                                type="submit"       
-                         
-                                [disabled]="!problemeForm.valid">
-                        
+<!-- DEBUT Zone bouton sauvegarder -->
+<div class="form-group row">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
+    <span>
+    <button class="btn btn-primary"
+    type="submit"
+    [disabled]="!problemeForm.valid">
     <fa name="save"></fa>
-                          &nbsp;&nbsp;Sauvegarder
-                        </button>
-                    </span>
-              
+    &nbsp;&nbsp;Sauvegarder
+    </button>
+    </span>
     </div>
-            </div>
+    </div>
+   
   
       
 </form>

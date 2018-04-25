@@ -21,16 +21,18 @@ export class ProblemeComponent implements OnInit {
 
   ngOnInit() {
     this.problemeForm = this.fb.group({
-        prenomProbleme:['',[Validators.required, Validators.minLength(3)]],
-        caractere:['',[nombreCaractereValidator.longueurMinimum(3)]],
+        prenomProbleme:['',[Validators.required, Validators.minLength(3), nombreCaractereValidator.longueurMinimum(3), nombreCaractereValidator.sansEspaces()]],
         nomProbleme:['',[Validators.required, Validators.maxLength(50)]],
         noTypeProbleme: ['', Validators.required],
-        appliquerNotifications:{value: 'pasnotification', disabled: false},
+        appliquerNotifications:{value: 'pasNotification', disabled: false},
         addresseCourrielGroup: this.fb.group({    
-          courriel:[{value:''}],
-          courrielConfirmation:[{value:''}]
+          courriel:[{value:'',disabled :true}],
+          courrielConfirmation:[{value:'',disabled :true}]
         }),
-        telephone:[{value: ''}],
+        telephone:[{value: '',disabled :true}],
+        descriptionProbleme:['',[Validators.required, Validators.minLength(5)]],
+        noUnite:[''],
+        dateProbleme:{value:Date(), disabled:true}
      });  
      
      this.typeProbleme.obtenirTypeProbleme()
@@ -73,7 +75,7 @@ gestionNotifications(typeProbleme : string): void {
   courrielConfirmationControl.enable();
  }else{
   if(typeProbleme === 'parMessageTexte'){
-    telephoneControl.setValidators([Validators.required,  Validators.pattern('[0-9]+'), Validators.minLength(10),  Validators.maxLength(10)])
+    telephoneControl.setValidators([Validators.required,  Validators.pattern('[0-9]+'), Validators.minLength(10),  Validators.maxLength(10)]);
     telephoneControl.enable();
    }
 } 

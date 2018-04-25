@@ -4,7 +4,7 @@ export class nombreCaractereValidator {
     static sansEspaces(): ValidatorFn{ 
         return(c: AbstractControl): { [key: string]:boolean}| null =>{ 
             if(c.value.trim().length > 0){
-                  return{ 'sansEspaces' : true};   
+                  return null;   
             }  
             
             return{ 'sansEspaces' : false};
@@ -14,7 +14,7 @@ export class nombreCaractereValidator {
     static longueurMinimum(min: number): ValidatorFn{ 
         return(c: AbstractControl): { [key: string]:boolean}| null =>{ 
             if(c.value.trim().length >= min ){
-                  return{ 'longueurMinimum' : true};   
+                  return null;   
             }  
             
             return{ 'longueurMinimum' : false};
