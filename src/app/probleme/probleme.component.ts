@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,  Validators, FormGroup } from '@angular/forms';
 import { nombreCaractereValidator } from '../shared/caracteres-validator';
-import { TypeProduitService } from './type-probleme.service';
+import { TypeProblemeService } from './type-probleme.service';
 import { ITypeProbleme } from './typeProbleme';
 import { validateConfig } from '@angular/router/src/config';
 import { emailMatcherValidator } from '../shared/emailMatcher-validator';
+import { IProbleme } from './probleme';
+import { ProblemeService } from './probleme.service';
 
 
 @Component({
@@ -17,14 +19,16 @@ export class ProblemeComponent implements OnInit {
   problemeForm: FormGroup;
   typesProblemes: ITypeProbleme[];
   errorMessage: string;
-  constructor(private fb: FormBuilder, private typeProbleme: TypeProduitService) { }
+  probleme: IProbleme;
+  messageSauvegarde: string;
+  constructor(private fb: FormBuilder, private typeProbleme: TypeProblemeService, private problemeService: ProblemeService) { }
 
   ngOnInit() {
     this.problemeForm = this.fb.group({
-        prenomProbleme:['',[Validators.required, Validators.minLength(3), nombreCaractereValidator.longueurMinimum(3), nombreCaractereValidator.sansEspaces()]],
-        nomProbleme:['',[Validators.required, Validators.maxLength(50)]],
+        prenom:['',[Validators.required, Validators.minLength(3), nombreCaractereValidator.longueurMinimum(3), nombreCaractereValidator.sansEspaces()]],
+        nom:['',[Validators.required, Validators.maxLength(50)]],
         noTypeProbleme: ['', Validators.required],
-        appliquerNotifications:{value: 'pasNotification', disabled: false},
+        notification:{value: 'pasNotification', disabled: false},
         addresseCourrielGroup: this.fb.group({    
           courriel:[{value:'',disabled :true}],
           courrielConfirmation:[{value:'',disabled :true}]
@@ -39,7 +43,7 @@ export class ProblemeComponent implements OnInit {
      .subscribe(typ => this.typesProblemes = typ,
                 error => this.errorMessage = <any>error);
 
-   this.problemeForm.get('appliquerNotifications').valueChanges
+   this.problemeForm.get('notification').valueChanges
   .subscribe(value => this.gestionNotifications(value));        
       
   }
@@ -86,4 +90,32 @@ telephoneControl.updateValueAndValidity();
 
 
   } 
+
+  save(): void {
+    if (this.problemeForm.dirty && this.problemeForm.valid) {
+         this.probleme = this.problemeForm.value;
+         // Affecter les valeurs qui proviennent du fg le plus interne.
+
+         this.probleme.prenom =  this.problemeForm.get('prenom').value;
+         this.probleme.nom =  this.problemeForm.get('nom').value;
+         this.probleme.notypeProbleme =  this.problemeForm.get('noTypeProbleme').value;
+         this.probleme.courriel =  this.problemeForm.get('addresseCourrielGroup.courriel').value;
+         this.probleme.courrielConfirmation =  this.problemeForm.get('addresseCourrielGroup.courrielConfirmation').value;
+         this.probleme.telephone =  this.problemeForm.get('telephone').value;
+         this.probleme.descriptionProbleme =  this.problemeForm.get('descriptionProbleme').value;
+          this.probleme.dateProbleme = new Date();
+ 
+     
+        this.problemeService.saveProbleme(this.probleme)
+            .subscribe( // on s'abonne car on a un retour du serveur à un moment donné avec la callback fonction
+                () => this.onSaveComplete(),  // Fonction callback
+                (error: any) => this.errorMessage = <any>error
+            );
+    } 
+  }
+  
+  onSaveComplete(): void {
+    this.problemeForm.reset();  // Pour remettre Dirty à false.  Autrement le Route Guard va dire que le formulaire n'est pas sauvegardé
+    this.messageSauvegarde = 'Votre demande a bien été sauvegardée.  Nous vous remercions.';
+  }  
 }

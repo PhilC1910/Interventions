@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProblemeComponent } from './probleme.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TypeProduitService } from './type-probleme.service';
+import { TypeProblemeService} from './type-probleme.service';
 import { HttpClientModule } from '@angular/common/http';
 import { emailMatcherValidator } from '../shared/emailMatcher-validator';
 
@@ -16,7 +16,7 @@ describe('ProblemeComponent', () => {
      
       imports: [AngularFontAwesomeModule,  ReactiveFormsModule, HttpClientModule],
       declarations: [ ProblemeComponent ],
-      providers:[TypeProduitService]
+      providers:[TypeProblemeService]
     })
     .compileComponents();
   }));

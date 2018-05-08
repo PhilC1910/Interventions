@@ -10,9 +10,9 @@ import { ProblemeComponent } from './probleme/probleme.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { TypeProblemeData } from './probleme/typeProbleme-data';
-import { TypeProduitService } from './probleme/type-probleme.service';
+import { TypeProblemeService } from './probleme/type-probleme.service';
+import { ProblemeService } from './probleme/probleme.service';
 
 @NgModule({
   declarations: [
@@ -27,10 +27,10 @@ import { TypeProduitService } from './probleme/type-probleme.service';
     AngularFontAwesomeModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(TypeProblemeData,{delay: 100})
+    HttpClientModule
+   
   ],
-  providers: [TypeProduitService],
+  providers: [TypeProblemeService,ProblemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

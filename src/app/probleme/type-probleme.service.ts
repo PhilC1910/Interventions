@@ -5,8 +5,8 @@ import'rxjs/add/operator/do';
 import'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
-export class TypeProduitService {
-private baseUrl = 'api/typeProbleme';
+export class TypeProblemeService {
+private baseUrl = 'https://gestioninterventionslb.azurewebsites.net/api/intervention';
   constructor(private _http: HttpClient) { }
   obtenirTypeProbleme(): Observable<ITypeProbleme[]> {
     return this._http.get<ITypeProbleme[]>(this.baseUrl)
